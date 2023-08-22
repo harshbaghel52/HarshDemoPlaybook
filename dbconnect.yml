@@ -1,8 +1,8 @@
-- name: hitting Data from MySQL
-  hosts: localhost
-  vars:
-    host: "194.195.112.205"
-  tasks:
+#- name: hitting Data from MySQL
+# hosts: localhost
+# vars:
+    #host: "194.195.112.205"
+#tasks:
     - name: Initialize a list to store alert type
       set_fact:
         alert_types: []
