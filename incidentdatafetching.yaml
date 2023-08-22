@@ -3,9 +3,9 @@
   hosts: localhost
   gather_facts: no
   vars:
-    servicenow_instance: https://dev123007.service-now.com
+    servicenow_instance: https://dev141143.service-now.com
     servicenow_user: admin
-    servicenow_password: U7VFd-m+orD8
+    servicenow_password: ti!Uk/0qVHA7
     param: ?sysparm_query=short_descriptionLIKE%20
   tasks:
     - block:
