@@ -42,6 +42,9 @@
           loop_control:
             loop_var: item
           register: incident_data
+        - name: "Incident Data "
+          debug:
+            msg: The operating system is {{ incident_data }}
       rescue:
         - name: Log Output For Failure
           debug:
