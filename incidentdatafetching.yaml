@@ -2,17 +2,12 @@
 - name: Fetch Incident and Update Incident fields data from ServiceNow
   hosts: localhost
   gather_facts: no
-
   vars:
-    servicenow_instance: "https://dev123007.service-now.com"
-    servicenow_user: "admin"
-    servicenow_password: "U7VFd-m+orD8"
-      #alerts: "['CPU Alert', 'Service Alert']"
-    param: "?sysparm_query=short_descriptionLIKE%20"
-
-
+    servicenow_instance: https://dev123007.service-now.com
+    servicenow_user: admin
+    servicenow_password: U7VFd-m+orD8
+    param: ?sysparm_query=short_descriptionLIKE%20
   tasks:
-
     - block:
         - name: include dbconnect playbook
           include: dbconnect.yml
@@ -20,34 +15,36 @@
         - name: print var
           debug:
             var: alert_names
-
         - name: Base64 encode credentials
           set_fact:
             encoded_credentials: "{{ (servicenow_user ~ ':' ~ servicenow_password) | b64encode }}"
           no_log: true
-
         - name: Add %20 to Variables
           set_fact:
-            encoded_search_queries: "{{ encoded_search_queries | default([]) + [item | replace(' ', '%20')] }}"
+            encoded_search_queries: "{{ encoded_search_queries | default([]) + [item |
+              replace(' ', '%20')] }}"
           loop: "{{ alert_names }}"
           loop_control:
             loop_var: item
-
         - name: Display Encoded Search Queries
           debug:
             var: encoded_search_queries
-
-
         - name: Fetch Incidents based on alert type and state
           uri:
             url: "{{ servicenow_instance }}/api/now/table/incident{{ param }}{{ item }}"
             method: GET
             headers:
-              Accept: "application/json"
-              Authorization: "Basic {{ encoded_credentials | string }}"
+              Accept: application/json
+              Authorization: Basic {{ encoded_credentials | string }}
             return_content: yes
             force_basic_auth: yes
           loop: "{{ encoded_search_queries }}"
           loop_control:
             loop_var: item
           register: incident_data
+      rescue:
+        - name: Log Output For Failure
+          debug:
+            msg: "Log : FAILED : Task {{ ansible_failed_task.name }} Failed and the ERROR:
+              {{ ansible_failed_result }}"
+          failed_when: true
