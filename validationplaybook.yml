@@ -7,7 +7,7 @@
   tasks:
     - block:
         - name: include  playbook to fetch Incident
-          include: includeDBconnectTOfetchINC.yml
+          include: includeDbconnectTofetchINC.yml 
           register: short_Descriptions
         - name: print var
           debug:
