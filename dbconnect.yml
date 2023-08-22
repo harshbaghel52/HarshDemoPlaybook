@@ -9,7 +9,7 @@
 
     - name: Execute MySQL Query
       community.mysql.mysql_query:
-        login_host: "{{ host }}"
+        login_host: "194.195.112.205"
         login_user: "root"
         login_password: "IRONMAN"
         login_db: Ansible
