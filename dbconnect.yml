@@ -13,6 +13,8 @@
         login_user: "root"
         login_password: "IRONMAN"
         login_db: incidentdata
+        login_port: "30517"
+        
         query: select alert_name from incidentdata.ci_details;
         #query: create table config_file (alert_name varchar(255), Temp_Id int);
           #query: INSERT INTO temp_details (ID, alert_name, Temp_Id) VALUES (1, 'CPU Alert', 45),(2, 'Service Alert', 95)
