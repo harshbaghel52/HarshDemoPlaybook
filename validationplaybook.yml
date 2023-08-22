@@ -1,0 +1,20 @@
+---
+- name: Fetch Incident and Update Incident fields data from ServiceNow
+  hosts: localhost
+  gather_facts: no
+  vars:
+    short_Descriptions: "{{ short_Descriptions }}"
+  tasks:
+    - block:
+        - name: include  playbook to fetch Incident
+          include: includeDBconnectTOfetchINC.yml
+          register: short_Descriptions
+        - name: print var
+          debug:
+            var: short_Descriptions
+      rescue:
+        - name: Log Output For Failure
+          debug:
+            msg: "Log : FAILED : Task {{ ansible_failed_task.name }} Failed and the ERROR:
+              {{ ansible_failed_result }}"
+          failed_when: true
