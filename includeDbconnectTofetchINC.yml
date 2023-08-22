@@ -1,7 +1,7 @@
 
 - name: Fetch Incident and Update Incident fields data from ServiceNow
   debug:
-    vars:
+    var:
       servicenow_instance: "https://dev141143.service-now.com"
       servicenow_user: "admin"
       servicenow_password: "ti!Uk/0qVHA7"
