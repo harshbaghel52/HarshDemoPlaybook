@@ -1,13 +1,19 @@
 
 - name: Fetch Incident and Update Incident fields data from ServiceNow
-  debug:
-    var:
-      servicenow_instance: "https://dev141143.service-now.com"
-      servicenow_user: "admin"
-      servicenow_password: "ti!Uk/0qVHA7"
-        #alerts: "['CPU Alert', 'Service Alert']"
-      param: "?sysparm_query=short_descriptionLIKE"
-      state: "%5Estate%3D1"
+
+  vars:
+
+    servicenow_instance: "https://dev141143.service-now.com"
+
+    servicenow_user: "admin"
+
+    servicenow_password: "ti!Uk/0qVHA7"
+
+      #alerts: "['CPU Alert', 'Service Alert']"
+
+    param: "?sysparm_query=short_descriptionLIKE"
+
+    state: "%5Estate%3D1"
 
 - name: include dbconnect playbook
   include: dbconnect.yml
