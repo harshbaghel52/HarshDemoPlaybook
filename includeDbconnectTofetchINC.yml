@@ -1,7 +1,7 @@
 ---
 - name: Fetch Incident and Update Incident fields data from ServiceNow
-  hosts: localhost
-  gather_facts: no
+  #hosts: localhost
+  #gather_facts: no
 
   vars:
     servicenow_instance: "https://dev141143.service-now.com"
