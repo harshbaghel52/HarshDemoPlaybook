@@ -1,7 +1,7 @@
 - name: hitting Data from MySQL
   hosts: localhost
   vars:
-    host: "db.vishal-chauhan.in"
+    host: "194.195.112.205"
   tasks:
     - name: Initialize a list to store alert type
       set_fact:
@@ -10,8 +10,8 @@
     - name: Execute MySQL Query
       community.mysql.mysql_query:
         login_host: "{{ host }}"
-        login_user: "linroot"
-        login_password: "&rU1HRBh4W9UHkDb"
+        login_user: "root"
+        login_password: "IRONMAN"
         login_db: Ansible
         query: select alert_name from Ansible.temp_details;
         #query: create table config_file (alert_name varchar(255), Temp_Id int);
