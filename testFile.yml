@@ -15,8 +15,7 @@
             var: short_Descriptions
         - name: Separating ciname
           set_fact:
-            ciname_value: "{{ short_Descriptions | regex_search('ci name is (.*?)\\.ansible\\.com') | first }}"
-
+            ciname_value: "{{ short_Descriptions  | regex_search('^([^\\.]+)\\.', '\\1') }}"
         - name: Display the ci_name
           debug:
            var: ciname_value
