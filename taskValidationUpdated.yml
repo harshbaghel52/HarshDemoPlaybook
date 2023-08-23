@@ -16,7 +16,7 @@
 
         - name: Convert binary data to text
           ansible.builtin.set_fact:
-            file_data: "{{ file_contents.content | b64decode | decode('utf-8') }}"
+            file_data: "{{ file_content.content | b64decode | decode('utf-8') }}"
 
         - name: Display the file data
           debug:
