@@ -22,7 +22,7 @@
 
         - name: Display the result from the MySQL Query Playbook
           debug:
-           var: query_result
+           var: query_result.query_result
 
         
 
