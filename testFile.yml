@@ -16,6 +16,10 @@
         - name: Separating ciname
           set_fact:
             ciname_value: "{{ short_Descriptions | regex_search('ci name is (.*?)\\.ansible\\.com') | first }}"
+
+        - name: Display the ci_name
+          debug:
+           var: ciname_value
       
 
         - name: Call the MySQL Query Playbook
