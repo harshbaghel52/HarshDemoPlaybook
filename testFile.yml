@@ -22,6 +22,10 @@
         - name: Display the result from the MySQL Query Playbook
           debug:
            var: query_result
+
+        - name: Display the result from the MySQL Query Playbook
+          debug:
+           var: query_result.ci_name 
      
         - name: Separating ciname
           set_fact:
