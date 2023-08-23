@@ -20,10 +20,15 @@
             query: "{{ mysql_query }}"
           register: query_result
 
+      
+        - name: New filter with mapping
+          debug:
+            msg: "{{ new_sql | map(attribute='ci_name') | list }}"
+          register: ci_name_output
+          tags: [never,test]
         - name: Display the result from the MySQL Query Playbook
           debug:
-           var: json_data.query_result.query_result[0].ci_name 
-
+           var: ci_name_output
         
 
         - name: Extract ci_name using json_query 
