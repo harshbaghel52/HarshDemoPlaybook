@@ -1,7 +1,7 @@
 ---
 - name: Execute MySQL Query and Get Output
-  hosts: localhost
-  gather_facts: no
+  #hosts: localhost
+  #gather_facts: no
 
   tasks:
     - name: Execute MySQL Query
