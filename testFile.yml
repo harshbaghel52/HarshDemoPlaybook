@@ -25,7 +25,7 @@
 
         - name: Display the result from the MySQL Query Playbook
           debug:
-          var: query_result
+           var: query_result
       rescue:
         - name: Log Output For Failure
           debug:
