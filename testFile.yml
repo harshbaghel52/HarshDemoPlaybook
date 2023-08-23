@@ -4,6 +4,7 @@
   gather_facts: no
   vars:
     short_Descriptions: "{{ short_Descriptions }}"
+    mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
   tasks:
     - block:
         - name: include  playbook to fetch Incident
@@ -15,9 +16,7 @@
         - name: Separating ciname
           set_fact:
             ciname_value: "{{ short_Descriptions | regex_search('ci name is (.*?)\\.ansible\\.com') | first }}"
-        - name: Define the MySQL query as a variable
-          set_fact:
-          mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
+      
 
         - name: Call the MySQL Query Playbook
           import_playbook: mysql_query_playbook.yml
