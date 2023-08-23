@@ -27,6 +27,9 @@
         - name: ci_name value 
           debug:
            var: extracted_ci_name
+        - name: Short Description Value
+          debug:
+           var: short_Descriptions
      
         - name: Separating ciname
           set_fact:
