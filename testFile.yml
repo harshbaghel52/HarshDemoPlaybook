@@ -18,10 +18,13 @@
           include_tasks: mysql_query_playbook.yml
           vars:
             query: "{{ mysql_query }}"
+          register: query_result
 
         - name: Display the result from the MySQL Query Playbook
           debug:
-           var: query_result
+           var: query_result.query_result.ci_name
+
+        
 
         - name: Extract ci_name using json_query 
           set_fact: 
