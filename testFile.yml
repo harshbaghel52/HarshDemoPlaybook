@@ -23,23 +23,17 @@
           debug:
            var: query_result
 
-        - name: Display the result from the MySQL Query Playbook
-          debug:
-           var: query_result.ci_name 
-     
-        - name: Separating ciname
-          set_fact:
-            ciname_value: "{{ short_Descriptions  | regex_search('query_result.ci_name is (' + query_result.ci_name + ')', '\\1') }}"
-            
-        - name: Display the ci_name
-          debug:
-           var: ciname_value
         - name: Extract ci_name using json_query 
           set_fact: 
            extracted_ci_name: "{{ json_data.query_result.query_result[0].ci_name }}"
         - name: ci_name value 
           debug:
            var: extracted_ci_name
+     
+        - name: Separating ciname
+          set_fact:
+            ciname_value: "{{ short_Descriptions  | regex_search('query_result.ci_name is (' + query_result.ci_name + ')', '\\1') }}"
+            
 
       
       rescue:
