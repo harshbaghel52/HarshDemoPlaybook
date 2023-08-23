@@ -28,7 +28,7 @@
 
 "impact": "string",
 
-"impactedCi": "string",
+"impactedCi": "harshwalah",
 
 "impactedService": "string",
 
