@@ -31,6 +31,10 @@
         - name: Separating ciname
           set_fact:
             ciname_value: "{{ short_Descriptions  | regex_search('extracted_ci_name is (' + extracted_ci_name + ')', '\\1') }}"
+
+        - name: ci_name value 
+          debug:
+           var: ciname_value
             
 
       
