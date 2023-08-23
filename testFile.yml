@@ -25,7 +25,7 @@
 
         - name: Extract ci_name using json_query 
           set_fact: 
-           extracted_ci_name: {{ query_result.stdout_lines[1:] | map('regex_replace', '^\\|\\s*(.*?)\\s*\\|\\s*(.*?)\\s*\\|$', '\\1,\\2') | list }}"
+           extracted_ci_name: "{{ query_result.stdout_lines[1:] | map('regex_replace', '^\\|\\s*(.*?)\\s*\\|\\s*(.*?)\\s*\\|$', '\\1,\\2') | list }}"  
         - name: ci_name value 
           debug:
            var: extracted_ci_name
