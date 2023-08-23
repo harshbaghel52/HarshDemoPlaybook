@@ -13,6 +13,10 @@
           #src: /home/ubuntu/.ansible/cmdb_data
            src: "{{ file_path }}"
           register: file_content
+        - name: print var
+          debug:
+            var: file_content
+
         - name: include  playbook to fetch Incident
           include: includeDbconnectTofetchINC.yml 
           register: short_Descriptions
