@@ -1,0 +1,135 @@
+{
+
+"body": {
+
+"age": "string",
+
+"assigneeContact": "null",
+
+"assigneeGroup": "CG GCC L1_Unix",
+
+"causedByChange": "string",
+
+"companyName": "matalan",
+
+"environment": "null",
+
+"externalSystem": "EON",
+
+"externalSystemInterface": "string",
+
+"externalSystemTicketId": "string",
+
+  "externalSystemTicketId1": "string",
+
+"fullDescription": "string",
+
+"groupTransfers": "string",
+
+"impact": "string",
+
+"impactedCi": "string",
+
+"impactedService": "string",
+
+"locationCity": "string",
+
+"locationCountry": "string",
+
+"locationName": "string",
+
+"locationStreet": "string",
+
+"locationZipCode": "string",
+
+"mainCategory": "Failure",
+
+"owner": "string",
+
+"ownerGroup": "string",
+
+"parentIncident": "string",
+
+"priority": "1",
+
+"reOpened": 0,
+
+"relatedKnowledge": "string",
+
+"relatedProblem": "string",
+
+"resolutionDescription": "string",
+
+"resolutionMethod": "string",
+
+"resolvedDate": "string",
+
+"resolvedName": "string",
+
+"securityRelated": true,
+
+"shortDescription": "string",
+
+"source": "string",
+
+"state": "New",
+
+"stateReason": "string",
+
+"subCategory": "windows",
+
+"systemIncidentId": "string",
+
+"templateName": "string",
+
+"ticketId": "string",
+
+"type": "string",
+
+"urgency": "string",
+
+"vendor": "string",
+
+"vendorGroup": "string",
+
+"closedDate": "string",
+
+"createdBy": "string",
+
+"modifiedBy": "string",
+
+"modifiedDate": "string",
+
+"openedDate": "string",
+
+"requestedBy": "string",
+
+"requestedFor": "string", 
+
+"resolvedBy": "string",
+
+"division": "EI",
+
+"active": "string",
+
+"locationSite": "spain",
+
+"createdDate": "string",
+
+"resolutionCode": "string",
+
+"reassignmentCount": "string",
+
+"contactType": "string"
+
+},
+
+"header": {
+
+"applicationId": "string",
+
+"topic": "cn/abc/st/New/dv/EI/ls/spain/es/EON/ac/null/ag/CG GCC L1_Unix/en/null/mc/Failure/sc/windows/pr/1"
+
+}
+
+}
