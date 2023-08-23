@@ -33,7 +33,7 @@
 
         - name: Extract ci_name using json_query 
           set_fact: 
-           extracted_ci_name: "{{ query_result.stdout_lines[1:] | map('regex_replace', '^\\|\\s*(.*?)\\s*\\|\\s*(.*?)\\s*\\|$', '\\1,\\2') | map('split', ',') | list }}"
+           extracted_ci_name: "{{ query_result.query_result[0][0].ci_name }}"
   
         - name: ci_name value 
           debug:
