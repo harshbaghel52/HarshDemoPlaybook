@@ -9,4 +9,4 @@
   register: query_result
 - name: Set the query result as a fact
   set_fact:
-    query_result: "{{ query_result.stdout_lines }}"
+    query_result: "{{ query_result}}"
