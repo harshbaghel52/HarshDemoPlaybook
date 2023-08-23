@@ -1,0 +1,49 @@
+---
+- name: Fetch Incident and Update Incident fields data from ServiceNow
+  hosts: localhost
+  gather_facts: no
+  vars:
+    short_Descriptions: "{{ short_Descriptions }}"
+    mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
+  tasks:
+    - block:
+        - name: include  playbook to fetch Incident
+          include: includeDbconnectTofetchINC.yml 
+          register: short_Descriptions
+        - name: print var
+          debug:
+            var: short_Descriptions
+
+        - name: Call the MySQL Query Playbook
+          include_tasks: mysql_query_playbook.yml
+          vars:
+            query: "{{ mysql_query }}"
+          register: query_result
+
+        - name: Extract ci_name using json_query 
+          set_fact: 
+           extracted_ci_name: "{{ query_result.query_result[0][0].ci_name }}"
+  
+        - name: ci_name value 
+          debug:
+           var: extracted_ci_name
+        - name: Short Description Value
+          debug:
+           var: short_Descriptions
+     
+        - name: Separating ciname
+          set_fact:
+            #ciname_value: "{{ short_Descriptions  | regex_search('extracted_ci_name is (' + extracted_ci_name + ')', '\\1') }}"
+            ciname_value: "{{ short_Descriptions | map('regex_search', '(\\w+)\\.ansible\\.com') | map('first') | list }}"
+        - name: ci_name value 
+          debug:
+           var: ciname_value
+            
+
+      
+      rescue:
+        - name: Log Output For Failure
+          debug:
+            msg: "Log : FAILED : Task {{ ansible_failed_task.name }} Failed and the ERROR:
+              {{ ansible_failed_result }}"
+          failed_when: true
