@@ -14,13 +14,13 @@
            src: "{{ file_path }}"
           register: file_content
 
-        - name: Convert binary data to text
-          ansible.builtin.set_fact:
-            file_data: "{{ file_content.content | b64decode | decode('utf-8') }}"
+        - name: Convert file content to JSON
+          set_fact:
+             json_data: "{{ file_content.content | b64decode | from_json }}"
 
         - name: Display the file data
           debug:
-            var: file_data
+            var: json_data
 
         - name: include  playbook to fetch Incident
           include: includeDbconnectTofetchINC.yml 
