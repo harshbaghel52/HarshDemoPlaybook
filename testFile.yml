@@ -23,7 +23,7 @@
       
         - name: New filter with mapping
           debug:
-            msg: "{{ new_sql | map(attribute='ci_name') | list }}"
+            msg: "{{ query_result | map(attribute='ci_name') | list }}"
           register: ci_name_output
           tags: [never,test]
         - name: Display the result from the MySQL Query Playbook
