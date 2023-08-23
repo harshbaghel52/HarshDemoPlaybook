@@ -1,19 +1,12 @@
----
-- name: Execute MySQL Query and Get Output
-  #hosts: localhost
-  #gather_facts: no
-
-  tasks:
-    - name: Execute MySQL Query
-      mysql_query:
-        login_host: "194.195.112.205"
-        login_user: "root"
-        login_password: "IRONMAN"
-        login_db: incidentdata
-        login_port: "30517"
-        query: "{{ query }}"
-      register: query_result
-
-    - name: Set the query result as a fact
-      set_fact:
-        query_result: "{{ query_result.stdout_lines }}"
+- name: Execute MySQL Query
+  mysql_query:
+    login_host: 194.195.112.205
+    login_user: root
+    login_password: IRONMAN
+    login_db: incidentdata
+    login_port: "30517"
+    query: "{{ query }}"
+  register: query_result
+- name: Set the query result as a fact
+  set_fact:
+    query_result: "{{ query_result.stdout_lines }}"
