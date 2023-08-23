@@ -34,7 +34,11 @@
         - name: Display the ci_name
           debug:
            var: ciname_value
-      
+        - name: Extract ci_name using json_query 
+          set_fact: 
+           extracted_ci_name: "{{ json_data.query_result.query_result[0].ci_name }}"
+          debug:
+           var: extracted_ci_name
 
       
       rescue:
