@@ -25,14 +25,10 @@
         - name: Extract Incidents from Payload Data.
           set_fact: 
            extracted_ci_name: "{{ json_data.incident_data.results}}"
-
-        - name: include  playbook to fetch Incident
-          include: includeDbconnectTofetchINC.yml 
-          register: short_Descriptions
+           
         - name: print var
           debug:
-            var: short_Descriptions
-
+            var: extracted_ci_name
         - name: Call the MySQL Query Playbook
           include_tasks: mysql_query_playbook.yml
           vars:
