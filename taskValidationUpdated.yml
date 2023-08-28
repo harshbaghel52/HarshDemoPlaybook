@@ -24,7 +24,7 @@
 
         - name: Extract Incidents from Payload Data.
           set_fact: 
-           extracted_ci_name: "{{ json_data.incident_data.results.number}}"
+           extracted_ci_name: "{{ json_data.incident_data.results}}"
 
         - name: include  playbook to fetch Incident
           include: includeDbconnectTofetchINC.yml 
