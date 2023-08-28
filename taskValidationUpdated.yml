@@ -22,6 +22,10 @@
           debug:
             var: json_data
 
+         - name: Extract ci_name using json_query 
+          set_fact: 
+           extracted_ci_name: "{{ json_data.incident_data[0][0].number}}"
+
         - name: include  playbook to fetch Incident
           include: includeDbconnectTofetchINC.yml 
           register: short_Descriptions
