@@ -40,7 +40,7 @@
             login_host: "{{ var_db_hostname }}"
             login_user: "{{ var_db_username }}"
             login_password: "{{ var_db_password }}"
-            login_db: "incidentdata"
+            #login_db: "incidentdata"
             login_port: "{{ var_db_port }}"
             query : "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
 
