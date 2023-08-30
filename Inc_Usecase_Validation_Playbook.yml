@@ -39,12 +39,4 @@
           vars:  
            query: "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
 
-    - name: Print SQL Query for Each Impacted CI
-      debug:
-        var: query_result
-      when: query is defined  # Print only if the variable is defined
-
-    - name: Display Return Output from MySQL Query Playbook
-      debug:
-        var: impacted_ci_details
-      when: impacted_ci_details is defined  # Display only if the variable is defined
+    
