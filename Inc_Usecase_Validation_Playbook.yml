@@ -39,14 +39,12 @@
             loop_var: impacted_ci
           vars:  
             query: "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
+        
+        - name: Fetch Cred Details for Impacted CI
+          mysql_query:
+            query: "SELECT credId FROM incredId-details where os = '{{ query_result.os }}' and restrict = '{{ query_result.install_status}}' and non-restrict = '{{ query_result.operational_status }}' and prod-EU-Domain = '{{ query_result.dns_domain}}';"
+          register: cred_details_result
 
-            # Add a task to fetch cred details from creddetails table for each impacted CI
-            - name: Fetch Cred Details for Impacted CI
-              mysql_query:
-                query: "SELECT credId FROM incredId-details where os = '{{ query_result.os }}' and restrict = '{{ query_result.install_status}}' and non-restrict = '{{ query_result.operational_status }}' and prod-EU-Domain = '{{ query_result.dns_domain}}';"
-              register: cred_details_result
-
-            # Display the cred details result
-            - name: Display Cred Details Result
-              debug:
-                var: cred_details_result
+        - name: Display Cred Details Result
+          debug:
+            var: cred_details_result
