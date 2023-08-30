@@ -26,7 +26,7 @@
           debug:
             var: item
           loop: "{{ impacetd_ci| json_query('[*].impactedCi') }}"
-            vars:
+          vars:
               body: "{{ impacetd_ci }}"
 
         - name: Display the file data
