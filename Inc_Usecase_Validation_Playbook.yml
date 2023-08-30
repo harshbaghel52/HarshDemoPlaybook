@@ -25,11 +25,11 @@
         - name: Extract Impacted CI values
           debug:
             var: item
-          loop: "{{ body| json_query('[*].impactedCi') }}"
+          loop: "{{ json_data | json_query('[*].impactedCi') }}"
           vars:
-            impacetd_ci: "{{ body }}"
+            impacetd_ci: "{{ json_data}}"
 
-        - name: Display the file data
+        - name: Display the impacted ci list
           debug:
             var: impacetd_ci
 
