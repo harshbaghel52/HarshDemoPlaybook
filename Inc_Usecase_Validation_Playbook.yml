@@ -22,6 +22,17 @@
           debug:
             var: json_data
 
+        - name: Extract Impacted CI values
+          debug:
+            var: item
+          loop: "{{ impacetd_ci| json_query('[*].impactedCi') }}"
+            vars:
+              body: "{{ impacetd_ci }}"
+
+        - name: Display the file data
+          debug:
+            var: impacetd_ci
+
         - name: Extract Incidents from Payload Data.
           set_fact: 
            extracted_ci_name: "{{ json_data.incident_data.results}}"
