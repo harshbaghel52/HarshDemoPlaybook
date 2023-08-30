@@ -46,7 +46,7 @@
 
     - name: Print SQL Query for Each Impacted CI
       debug:
-        var: query
+        var: query_result
       when: query is defined  # Print only if the variable is defined
 
     - name: Display Return Output from MySQL Query Playbook
