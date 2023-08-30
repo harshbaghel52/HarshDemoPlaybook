@@ -27,7 +27,7 @@
             var: item
           loop: "{{ json_data.body | json_query('[*].impactedCi') }}"
           vars:
-            impacted_ci: "{{ json_data.body }}"
+            impacted_ci: "{{ item }}"
 
         #- name: Extract Incidents from Payload Data.
           #set_fact: 
@@ -35,6 +35,6 @@
 
         - name: Display the impacted ci list
           debug:
-            var: impacted_ci
+            var: item
 
      
