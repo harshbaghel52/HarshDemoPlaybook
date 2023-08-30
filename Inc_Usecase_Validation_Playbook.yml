@@ -11,13 +11,12 @@
     - block:
         - name: Read data from payload file
           slurp:
-          #src: /home/ubuntu/.ansible/cmdb_data
-           src: "{{ file_path }}"
+            src: "{{ file_path }}"
           register: file_content
 
         - name: Convert file content to JSON
           set_fact:
-             json_data: "{{ file_content.content | b64decode | from_json }}"
+            json_data: "{{ file_content.content | b64decode | from_json }}"
 
         - name: Display the file data
           debug:
@@ -27,10 +26,6 @@
           set_fact:
             impacted_ci_List: "{{ impacted_ci_List + [item] }}"
           loop: "{{ json_data.body | json_query('[*].impactedCi') }}"
-
-        #- name: Extract Incidents from Payload Data.
-          #set_fact: 
-            #impacted_ci: "{{ json_data.body }}"
 
         - name: Display the impacted ci list
           debug:
@@ -42,18 +37,14 @@
           loop_control:
             loop_var: impacted_ci
           vars:  
-           login_host: "{{ db_host }}"
-           login_user: "{{ db_user }}"
-           login_password: "{{ db_password }}"
-           login_db: "{{ db_name }}"
-           login_port: "{{ db_port }}"
-           query : "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
+            login_host: "{{ db_host }}"
+            login_user: "{{ db_user }}"
+            login_password: "{{ db_password }}"
+            login_db: "{{ db_name }}"
+            login_port: "{{ db_port }}"
+            query : "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
 
-       - name: Display Return Output from MySQL Query Playbook
-         debug:
-          var: impacted_ci_details
-         when: impacted_ci_details is defined  # Display only if the variable is defined
-
-
-
-     
+    - name: Display Return Output from MySQL Query Playbook
+      debug:
+        var: impacted_ci_details
+      when: impacted_ci_details is defined  # Display only if the variable is defined
