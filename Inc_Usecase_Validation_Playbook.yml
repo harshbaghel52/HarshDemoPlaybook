@@ -35,6 +35,6 @@
 
         - name: Display the impacted ci list
           debug:
-            var: item
+            var: impacted_ci
 
      
