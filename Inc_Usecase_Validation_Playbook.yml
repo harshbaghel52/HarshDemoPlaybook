@@ -7,6 +7,7 @@
     mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
     file_path: "inputValidationUsecasePayload.txt"
     impacted_ci_List: []
+
   tasks:
     - block:
         - name: Read data from payload file
