@@ -7,6 +7,10 @@
     login_port: "{{ var_db_port }}"
     query: "{{ query }}"
   register: query_result
+  
+- name: Print Query 
+  debug:
+    var: query
 
 - name: Print Query Result
   debug:
