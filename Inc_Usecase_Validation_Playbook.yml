@@ -1,0 +1,27 @@
+---
+- name: Fetch Incident and Update Incident fields data from ServiceNow
+  hosts: localhost
+  gather_facts: no
+  vars:
+    short_Descriptions: "{{ short_Descriptions }}"
+    mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
+    file_path: "inputValidationUsecasePayload.txt"
+  tasks:
+    - block:
+        - name: Read data from payload file
+          slurp:
+          #src: /home/ubuntu/.ansible/cmdb_data
+           src: "{{ file_path }}"
+          register: file_content
+
+        - name: Convert file content to JSON
+          set_fact:
+             json_data: "{{ file_content.content | b64decode | from_json }}"
+
+        - name: Display the file data
+          debug:
+            var: json_data
+
+        - name: Extract Incidents from Payload Data.
+          set_fact: 
+           extracted_ci_name: "{{ json_data.incident_data.results}}"
