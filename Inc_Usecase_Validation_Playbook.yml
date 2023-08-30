@@ -29,10 +29,12 @@
           vars:
             impacted_ci: "{{ json_data.body }}"
 
+        - name: Extract Incidents from Payload Data.
+          set_fact: 
+            impacted_ci: "{{ json_data.body }}"
+
         - name: Display the impacted ci list
           debug:
             var: impacted_ci
 
-        - name: Extract Incidents from Payload Data.
-          set_fact: 
-           extracted_ci_name: "{{ json_data.incident_data.results}}"
+     
