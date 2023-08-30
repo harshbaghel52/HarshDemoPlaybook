@@ -39,7 +39,12 @@
             loop_var: impacted_ci
           vars:  
             query: "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
-            query: "SELECT credId FROM incredId-details where os = '{{ query_result.query_result[0][0].os }}' and restrict = '{{ query_result.query_result[0][0].install_status}}' and non-restrict = '{{ query_result.query_result[0][0].operational_status }}' and prod-EU-Domain = '{{ query_result.query_result[0][0].dns_domain}}';"
+            #query: "SELECT credId FROM incredId-details where os = '{{ query_result.query_result[0][0].os }}' and restrict = '{{ query_result.query_result[0][0].install_status}}' and non-restrict = '{{ query_result.query_result[0][0].operational_status }}' and prod-EU-Domain = '{{ query_result.query_result[0][0].dns_domain}}';"
+          with_items: "{{ impacted_ci_List }}"
+          loop_control:
+            loop_var: impacted_ci
+          vars:  
+            query: "SELECT credId FROM incredId-details where os = '{{ query_result.query_result[0][0].os }}' and restrict = '{{ query_result.query_result[0][0].install_status}}' and non-restrict = '{{ query_result.query_result[0][0].operational_status }}' and prod-EU-Domain = '{{ query_result.query_result[0][0].dns_domain}}';"  
           register: cred_details_result
         - name: Fetch Cred Details for Impacted CI
           include_tasks: mysql_query_playbook.yml
