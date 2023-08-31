@@ -37,7 +37,8 @@
       loop_control:
         loop_var: impacted_ci
       vars:  
-        query: "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
+        #query: "SELECT * FROM incidentdata.ci_details where ci_name = '{{ impacted_ci }}' ;"
+        query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os;"
         #query2: "SELECT credId FROM incredId-details where os = '{{ query_result_item.item.0.os }}' and restrict = '{{ query_result_item.item.0.install_status }}' and non-restrict = '{{ query_result_item.item.0.operational_status }}' and prod-EU-Domain = '{{ query_result_item.item.0.dns_domain }}';"
       #register: query_result
 
@@ -45,4 +46,4 @@
 
     - name: Display Cred Details Result
       debug:
-        var: cred_details_result
+        var: query_result
