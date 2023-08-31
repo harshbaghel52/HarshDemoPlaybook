@@ -46,10 +46,15 @@
     - name: Loop through impacted CIs and include tasks
       include_tasks: mysql_query_playbook.yml
       vars:  
-        query: "select alertType from template_details where ticketType='{{ ticketType }}' ;"
+        query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
+      loop: "{{ query_result.query_result[0][0].alertType }}"
+      loop_control:
+        loop_var: alertdata
+      debug:
+        var: alertdata
 
 
-
+    -
     #- name: Display Cred Details Result
       #debug:
         #var: query_result
