@@ -47,6 +47,7 @@
       include_tasks: mysql_query_playbook.yml
       vars:  
         query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
+      register: alert_result
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
