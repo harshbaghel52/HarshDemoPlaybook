@@ -44,6 +44,6 @@
 
 
 
-    - name: Display Cred Details Result
-      debug:
-        var: query_result
+    #- name: Display Cred Details Result
+      #debug:
+        #var: query_result
