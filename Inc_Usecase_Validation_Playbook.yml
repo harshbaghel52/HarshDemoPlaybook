@@ -56,7 +56,7 @@
       loop_control:
         loop_var: item
       register: item.shortDescription
-      when: "'alert_result.results[0].rows[0].alertType' in item.shortDescription and 'alert_result.results[0].rows[0].alertType' in item.fullDescription"
+      #when: "'alert_result.results[0].rows[0].alertType' in item.shortDescription and 'alert_result.results[0].rows[0].alertType' in item.fullDescription"
 
 
     -
