@@ -48,13 +48,13 @@
       vars:  
         query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
 
-    - name: Loop through json_data.body
+    - name: Loop through json_data.body and check for 'alert' key
       debug:
-        msg: "'alert' key exists in short_desc: {{ item.short_desc }} and desc: {{ item.desc }}"
+        msg: "'alert' key exists in item: {{ item }}"
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
-      when: "'alert' in item.short_desc and 'alert' in item.desc"
+      when: "'alert' in alert_result.results[0].rows[0].alertType"  # Check if 'alert' key exists in the query result
 
 
     -
