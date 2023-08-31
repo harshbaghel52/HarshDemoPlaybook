@@ -55,11 +55,11 @@
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
-      register: item.shortDescription
-      #when: "'alert_result.results[0].rows[0].alertType' in item.shortDescription and 'alert_result.results[0].rows[0].alertType' in item.fullDescription"
+      #register: item.shortDescription
+      when: "'alert_result.results[0].rows[0].alertType' in item.shortDescription and 'alert_result.results[0].rows[0].alertType' in item.fullDescription"
 
 
     -
     - name: Display Cred Details Result
       debug:
-        var: item.shortDescription
+        var: alert_result.results[0].rows[0].alertType
