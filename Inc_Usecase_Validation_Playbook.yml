@@ -49,6 +49,10 @@
         query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
       register: alert_result
 
+    - name: Display Cred Details Result
+      debug:
+        var: alert_result
+
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
         msg: " {{ item | json_query('[*].shortDescription') }} and  {{ item | json_query('[*].fullDescription') }} "
@@ -61,6 +65,4 @@
 
 
     -
-    - name: Display Cred Details Result
-      debug:
-        var: alert_result
+   
