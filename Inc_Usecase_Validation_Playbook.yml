@@ -70,5 +70,11 @@
       when: "'alert_result.query_result[0][0].alertType' in item['shortDescription'] and 'alert_result.query_result[0][0].alertType' in item['fullDescription']"
 
 
-    -
+   - name: Loop through json_data.body and check for 'alert' key in short_desc and desc (False Condition)
+     debug:
+       msg: "Checking item (False Condition): {{ item | json_query('[*].shortDescription') }} and {{ item | json_query('[*].fullDescription') }}"
+     loop: "{{ json_data.body }}"
+     loop_control:
+       loop_var: item
+     when: "'alert_result.query_result[0][0].alertType' not in item.shortDescription or 'alert_result.query_result[0][0].alertType' not in item.fullDescription"
    
