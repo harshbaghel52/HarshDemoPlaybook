@@ -47,11 +47,14 @@
       include_tasks: mysql_query_playbook.yml
       vars:  
         query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
-      loop: "{{ query_result.query_result[0][0].alertType }}"
-      loop_control:
-        loop_var: alertdata
+
+    - name: Loop through json_data.body
       debug:
-        var: alertdata
+        msg: "'alert' key exists in short_desc: {{ item.short_desc }} and desc: {{ item.desc }}"
+      loop: "{{ json_data.body }}"
+      loop_control:
+        loop_var: item
+      when: "'alert' in item.short_desc and 'alert' in item.desc"
 
 
     -
