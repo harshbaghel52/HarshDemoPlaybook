@@ -49,9 +49,9 @@
         query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
       register: query_result
 
-    - name: Display Cred Details Result
-      debug:
-        var: query_result
+    - name: Set alert_data variable
+      set_fact:
+        alert_result: "{{ query_result }}"
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
