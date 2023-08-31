@@ -46,7 +46,7 @@
     - name: Loop through impacted CIs and include tasks
       include_tasks: mysql_query_playbook.yml
       vars:  
-        query: "select alertType from template_details where ticketType="{{ ticketType }}" ;"
+        query: "select alertType from template_details where ticketType='{{ ticketType }}' ;"
 
 
 
