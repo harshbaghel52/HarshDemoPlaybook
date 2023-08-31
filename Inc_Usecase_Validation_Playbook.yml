@@ -64,7 +64,7 @@
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc (False Condition)
       debug:
-        msg: "Checking item (False Condition): item['shortDescription'] and item['fullDescription'] "
+        msg: "Checking item (False Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }}"
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
