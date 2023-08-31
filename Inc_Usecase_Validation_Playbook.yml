@@ -7,6 +7,7 @@
     mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
     file_path: "inputValidationUsecasePayload.txt"
     impacted_ci_List: []
+    ticketType: " e2e"
 
   tasks:
     - name: Read data from payload file
@@ -41,6 +42,11 @@
         query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os and ci.dns_domain = cr.`prod-EU-Domain` and ci.credType = cr.credType  where ci_name = '{{ impacted_ci }}';"
         #query2: "SELECT credId FROM incredId-details where os = '{{ query_result_item.item.0.os }}' and restrict = '{{ query_result_item.item.0.install_status }}' and non-restrict = '{{ query_result_item.item.0.operational_status }}' and prod-EU-Domain = '{{ query_result_item.item.0.dns_domain }}';"
       #register: query_result
+
+    - name: Loop through impacted CIs and include tasks
+      include_tasks: mysql_query_playbook.yml
+      vars:  
+        query: "select alertType from template_details where ticketType="{{ ticketType }}" ;"
 
 
 
