@@ -7,7 +7,7 @@
     mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
     file_path: "inputValidationUsecasePayload.txt"
     impacted_ci_List: []
-    ticketType: " e2e"
+    ticketType: "e2e"
 
   tasks:
     - name: Read data from payload file
