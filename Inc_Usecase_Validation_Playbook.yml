@@ -50,7 +50,7 @@
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
-        msg: "'alert' key exists in short_desc: {{ item.short_desc }} and desc: {{ item.desc }}"
+        msg: "'alert' key exists in short_desc: {{ item.shortDescription }} and desc: {{ item.fullDescription }}"
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
@@ -58,6 +58,6 @@
 
 
     -
-    #- name: Display Cred Details Result
-      #debug:
-        #var: query_result
+    - name: Display Cred Details Result
+      debug:
+        var: item.shortDescription
