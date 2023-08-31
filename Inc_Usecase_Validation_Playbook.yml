@@ -53,6 +53,12 @@
       set_fact:
         alert_result: "{{ query_result }}"
 
+    - name: Display the file data
+      debug:
+        var: alert_result.query_result[0][0].alertType
+
+        
+
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
         msg: " {{ item | json_query('[*].shortDescription') }} and  {{ item | json_query('[*].fullDescription') }} "
