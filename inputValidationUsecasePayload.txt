@@ -34,7 +34,7 @@
       "resolvedDate": "string",
       "resolvedName": "string",
       "securityRelated": true,
-      "shortDescription": "alert on server1 for spooler on servicerestart",
+      "shortDescription": "alert on server1 for spooler on Service Status",
       "source": "string",
       "state": "New",
       "stateReason": "string",
