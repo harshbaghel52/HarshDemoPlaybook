@@ -66,6 +66,10 @@
         loop_var: item
       when: "item.0 in item.1['shortDescription'] and item.0 in item.1['fullDescription']"
       register: alertOutput
+
+    - name: Display the alertOutput
+      debug:
+        var: alertOutput
           
    
         
