@@ -57,15 +57,15 @@
     #- name: Display the file data
       #debug:
         #var: alert_result.query_result[0][0].alertType
-    - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
+
+    - name: Loop through json_data.body and check for 'alert' key in short_desc and desc nested product
       debug:
-        msg: "Checking item (true Condition): mil gya hmko {{ item.0  }}"
-      #loop: "{{ json_data.body }}"
-      when: " item.0 in item[1]['shortDescription'] and item.0  in item[1]['fullDescription']"
-      with_nested:
-        - "{{ alert_types }}"
-        - "{{ json_data.body }}"
-      
+        msg: "Checking item (true Condition): mil gya hmko {{ item.0 }}"
+      loop: "{{ alert_types | product(json_data.body) | list }}"
+      loop_control:
+        loop_var: item
+      when: "item.0 in item.1['shortDescription'] and item.0 in item.1['fullDescription']"
+   
         
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc nested loop
       debug:
