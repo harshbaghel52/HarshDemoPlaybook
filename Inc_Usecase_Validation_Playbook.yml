@@ -71,3 +71,13 @@
       loop_control:
         loop_var: item
       when: "'alert_result.query_result[0][0].alertType' not in item.shortDescription or 'alert_result.query_result[0][0].alertType' not in item.fullDescription"
+
+
+    - name: Check 'alert_result.query_result[0][0].alertType' in descriptions
+      assert:
+        that:
+          - "'alert_result.query_result[0][0].alertType' in item['shortDescription'] and 'alert_result.query_result[0][0].alertType' in item['fullDescription']"
+        msg: "Checking item (true Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }}"
+      loop: "{{ json_data.body }}"
+      loop_control:
+        loop_var: item
