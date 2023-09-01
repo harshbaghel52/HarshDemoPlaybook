@@ -48,7 +48,7 @@
 
     - name: Extract alertType values from query_result
       set_fact:
-        alert_types: "{{ query_result.query_result[0][0] | map(attribute='ansible_facts.query_result.rows[0][0]') | list }}"
+        alert_types: "{{ query_result.query_result[0] | map(attribute='alertType') | list }}"
 
     - name: Display all the alert Types
       debug:
