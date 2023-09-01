@@ -59,8 +59,8 @@
         #var: alert_result.query_result[0][0].alertType
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
-        msg: "Checking item (true Condition): mil gya hmko {{ alert_types }}"
-      loop: "{{ json_data.body }}"
+        msg: "Checking item (true Condition): mil gya hmko {{ item.0  }}"
+      #loop: "{{ json_data.body }}"
       when: " item.0 in item[1]['shortDescription'] and item.0  in item[1]['fullDescription']"
       with_nested:
         - "{{ alert_types }}"
