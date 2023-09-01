@@ -61,7 +61,7 @@
       debug:
         msg: "Checking item (true Condition): mil gya hmko {{ alert_type }}"
       loop: "{{ json_data.body }}"
-      when: "alert_type in item.1['shortDescription'] and alert_type in item.1['fullDescription']"
+      when: "alert_type in item[1]['shortDescription'] and alert_type in item[1]['fullDescription']"
       loop_control:
         loop_var: item
       with_nested:
