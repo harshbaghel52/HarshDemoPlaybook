@@ -70,6 +70,20 @@
     - name: Display the alertOutput
       debug:
         var: alert_type_matched
+
+    - name: Loop through the alert_type_matched
+      include_tasks: mysql_query_playbook.yml
+      vars:  
+        query: "select tempId from template_details where alertType ='{{ alert_type_matched }}' ;"
+      register: query_result
+
+     - name: Extract tempId values from query_result
+      set_fact:
+        tempId_List: "{{ query_result.query_result[0] | map(attribute='tempId') | list }}"
+
+    - name: Display all the alert Types
+      debug:
+         var: tempId_List
           
    
         
