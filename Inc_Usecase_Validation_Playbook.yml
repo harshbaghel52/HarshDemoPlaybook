@@ -81,7 +81,7 @@
       set_fact:
         tempId_List: "{{ query_result.query_result[0] | map(attribute='tempId') | list }}"
 
-    - name: Display all the alert Types
+    - name: Display all the tempId
       debug:
          var: tempId_List
           
