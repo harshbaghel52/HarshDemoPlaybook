@@ -77,7 +77,7 @@
         query: "select tempId from template_details where alertType ='{{ alert_type_matched }}' ;"
       register: query_result
 
-     - name: Extract tempId values from query_result
+    - name: Extract tempId values from query_result
       set_fact:
         tempId_List: "{{ query_result.query_result[0] | map(attribute='tempId') | list }}"
 
