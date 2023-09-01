@@ -56,7 +56,7 @@
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
-        msg: "Checking item (true Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }} and {{ short_description }}"
+        msg: "Checking item (true Condition): mil gya hmko  {{ short_description }}"
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
@@ -66,22 +66,4 @@
       #when: " item['shortDescription'] is search ('alert_result.query_result[0][0].alertType')  and  item['fullDescription'] is search ('alert_result.query_result[0][0].alertType') "
       no_log: true
 
-    - name: Loop through json_data.body and check for 'alert' key in short_desc and desc (False Condition)
-      debug:
-        msg: #"Checking item (False Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }}"
-             "'alert_result.query_result[0][0].alertType' in item['shortDescription'] and 'alert_result.query_result[0][0].alertType' in item['fullDescription']"
-      loop: "{{ json_data.body }}"
-      loop_control:
-        loop_var: item
-      when: "'alert_result.query_result[0][0].alertType' not in item.shortDescription or 'alert_result.query_result[0][0].alertType' not in item.fullDescription"
-      no_log: true
-
-
-    - name: Check 'alert_result.query_result[0][0].alertType' in descriptions
-      assert:
-        that:
-          - "'alert_result.query_result[0][0].alertType' in item['shortDescription'] and 'alert_result.query_result[0][0].alertType' in item['fullDescription']"
-        msg: "Checking item (true Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }}"
-      loop: "{{ json_data.body }}"
-      loop_control:
-        loop_var: item
+    
