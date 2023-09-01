@@ -66,8 +66,6 @@
       loop_control:
         loop_var: item
       when: "alert_type in item['shortDescription'] and alert_type in item['fullDescription']"
-      #vars:
-        #alert_type: "{{ item['shortDescription'] }}"
       with_items: "{{ json_data.alert_types }}"
       loop_control:
         loop_var: alert_type
