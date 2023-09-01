@@ -43,16 +43,20 @@
     - name: Loop through impacted CIs and include tasks
       include_tasks: mysql_query_playbook.yml
       vars:  
-        query: "select alertType,tempId from template_details where ticketType='{{ ticketType }}' ;"
+        query: "select alertType from template_details where ticketType='{{ ticketType }}' ;"
       register: query_result
 
-    - name: Set alert_data variable
+    - name: Extract alertType values from query_result
       set_fact:
-        alert_result: "{{ query_result }}"
+        alert_types: "{{ query_result.results | map(attribute='ansible_facts.query_result.rows[0][0]') | list }}"
 
-    - name: Display the file data
+    - name: Set alert_data variable
       debug:
-        var: alert_result.query_result[0][0].alertType
+         var: alert_types
+
+    #- name: Display the file data
+      #debug:
+        #var: alert_result.query_result[0][0].alertType
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
