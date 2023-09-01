@@ -56,11 +56,13 @@
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc
       debug:
-        msg: "Checking item (true Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }}"
+        msg: "Checking item (true Condition): {{ item['shortDescription'] }} and {{ item['fullDescription'] }} and short_description "
       loop: "{{ json_data.body }}"
       loop_control:
         loop_var: item
-      when: "'alert_result.query_result[0][0].alertType' in '{{ item.shortDescription }}' and 'alert_result.query_result[0][0].alertType' in '{{ item.fullDescription }}' "
+        short_description: "{{ item.shortDescription }}"
+        full_description: "{{ item.fullDescription }}"
+      when: "'alert_result.query_result[0][0].alertType' in short_description and 'alert_result.query_result[0][0].alertType' in full_description "
       #when: " item['shortDescription'] is search ('alert_result.query_result[0][0].alertType')  and  item['fullDescription'] is search ('alert_result.query_result[0][0].alertType') "
 
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc (False Condition)
