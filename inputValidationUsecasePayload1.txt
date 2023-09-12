@@ -28,7 +28,7 @@
 
 "impact": "string",
 
-"impactedCi": "string",
+"impactedCi": "CI-001",
 
 "impactedService": "string",
 
