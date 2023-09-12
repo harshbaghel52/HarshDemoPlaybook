@@ -1,0 +1,90 @@
+---
+- name: Fetch Incident and Update Incident fields data from ServiceNow
+  hosts: localhost
+  gather_facts: no
+  vars:
+    short_Descriptions: "{{ short_Descriptions }}"
+    mysql_query: "SELECT * FROM incidentdata.incidentConfigDetails;;"
+    file_path: "inputValidationUsecasePayload.txt"
+    impacted_ci_List: []
+    ticketType: "e2e"
+
+  tasks:
+    - name: Read data from payload file
+      slurp:
+        src: "{{ file_path }}"
+      register: file_content
+
+    - name: Convert file content to JSON
+      set_fact:
+        json_data: "{{ file_content.content | b64decode | from_json }}"
+
+    - name: Display the file data
+      debug:
+        var: json_data
+
+    - name: Extract Impacted CI values and append to the list
+      set_fact:
+        impacted_ci_List: "{{ impacted_ci_List + [item] }}"
+      loop: "{{ json_data.body | json_query('[*].impactedCi') }}"
+
+    - name: Display the impacted ci list
+      debug:
+        var: impacted_ci_List
+
+    - name: Loop through impacted CIs and include tasks
+      include_tasks: mysql_query_playbook.yml
+      loop: "{{ impacted_ci_List }}"
+      loop_control:
+        loop_var: impacted_ci
+      vars:  
+        query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os and ci.dns_domain = cr.`prod-EU-Domain` and ci.credType = cr.credType  where ci_name = '{{ impacted_ci }}';"
+
+    - name: Loop through impacted CIs and include tasks
+      include_tasks: mysql_query_playbook.yml
+      vars:  
+        query: "select alertType from template_details where ticketType='{{ ticketType }}' ;"
+      register: query_result
+
+    - name: Extract alertType values from query_result
+      set_fact:
+        alert_types: "{{ query_result.query_result[0] | map(attribute='alertType') | list }}"
+
+    - name: Display all the alert Types
+      debug:
+         var: alert_types
+
+    #- name: Display the file data
+      #debug:
+        #var: alert_result.query_result[0][0].alertType
+
+    - name: Loop through json_data.body and check for 'alert' key in short_desc and desc nested product
+      set_fact:
+        alert_type_matched: "{{ alert_type_matched | default([]) + [item.0] }}"
+      loop: "{{ alert_types | product(json_data.body) | list }}"
+      loop_control:
+        loop_var: item
+      when: "item.0 in item.1['shortDescription'] and item.0 in item.1['fullDescription']"
+      #register: alertOutput
+
+    - name: Display the alertOutput
+      debug:
+        var: alert_type_matched
+
+    - name: Loop through the alert_type_matched
+      include_tasks: mysql_query_playbook.yml
+      vars:  
+        query: "select tempId from template_details where alertType = '{{ alert_type_matched[0] }}' ;"
+      register: query_result
+
+    - name: Extract tempId values from query_result
+      set_fact:
+        tempId_List: "{{ query_result.query_result[0] | map(attribute='tempId') | list }}"
+
+    - name: Display all the tempId
+      debug:
+         var: tempId_List
+          
+   
+        
+    
