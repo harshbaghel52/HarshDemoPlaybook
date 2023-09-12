@@ -34,11 +34,11 @@
 
     - name: Loop through impacted CIs and include tasks
       include_tasks: mysql_query_playbook.yml
-      loop: "{{ impacted_ci_List }}"
-      loop_control:
-        loop_var: impacted_ci
+      #loop: "{{ impacted_ci_List }}"
+      #loop_control:
+        #loop_var: impacted_ci
       vars:  
-        query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os and ci.dns_domain = cr.`prod-EU-Domain` and ci.credType = cr.credType  where ci_name = '{{ impacted_ci }}';"
+        query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os and ci.dns_domain = cr.`prod-EU-Domain` and ci.credType = cr.credType  where ci_name = '{{ impacted_ci_List }}';"
 
     - name: Loop through impacted CIs and include tasks
       include_tasks: mysql_query_playbook.yml
