@@ -38,7 +38,7 @@
       #loop_control:
         #loop_var: impacted_ci
       vars:  
-        query: "SELECT * FROM incidentdata ;"
+        query: "SELECT * FROM ci_details ;"
 
 
     - name: Loop through impacted CIs and include tasks
