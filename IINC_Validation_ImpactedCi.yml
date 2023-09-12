@@ -25,7 +25,7 @@
 
     - name: Extract Impacted CI values and append to the list
       set_fact:
-        impacted_ci_List: "{{ json_data.body | json_query('[*].impactedCi') }}"
+       impacted_ci_List: "{{ json_data.body | json_query('impactedCi') }}"
       
 
     - name: Display the impacted ci list
