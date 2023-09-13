@@ -22,7 +22,7 @@
 
   "externalSystemTicketId1": "string",
 
-"fullDescription": "string",
+"fullDescription": "[Critical] [['server1']] [APPLICATION] [ABC] [FRA] [PRODUCTION] [DIRECT] [C] [server1.airbus.corp] [FORGES] [spooler] [Service Status] [Windows Service: Service Status > 0 0 Running; 1 Ok Not Running; 2 Warning Not Running; 3 Alarm Not Running for 5 min.] []",
 
 "groupTransfers": "string",
 
@@ -68,7 +68,7 @@
 
 "securityRelated": true,
 
-"shortDescription": "string",
+"shortDescription": "alert on server1 for spooler on Service Status",
 
 "source": "string",
 
