@@ -64,6 +64,16 @@
       #debug:
         #var: alert_result.query_result[0][0].alertType
 
+    - name: Loop through alert types and check for a match in JSON data
+      set_fact:
+        alert_type_matched: "{{ alert_type_matched | default([]) + [item] }}"
+      loop: "{{ alert_types }}"
+      when: "'{{ item }}' in json_data.body[*].shortDescription and '{{ item }}' in json_data.body[*].fullDescription"
+
+    - name: Display the alert_type_matched
+      debug:
+        var: alert_type_matched
+
     - name: Loop through json_data.body and check for 'alert' key in short_desc and desc nested product
       set_fact:
         alert_type_matched: "{{ alert_type_matched | default([]) + [item.0] }}"
