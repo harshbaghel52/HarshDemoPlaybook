@@ -63,13 +63,16 @@
     #- name: Display the file data
       #debug:
         #var: alert_result.query_result[0][0].alertType
-    - name: Loop through json_data.body and check for 'alert' key in short_desc and desc nested produc
+
+    - name: Loop through alert types and check for a match in JSON data
       set_fact:
-        alert_type_matched: "{{ alert_type_matched | default([]) + [item] }}"
+       alert_type_matched: "{{ alert_type_matched | default([]) + [item] }}"
       loop: "{{ alert_types }}"
       loop_control:
-        loop_var: item
-      when: "item in json_data.body['shortDescription'] and item in json_data.body['fullDescription']"
+       loop_var: item
+      when: "item in json_data.body.shortDescription and item in json_data.body.fullDescription"
+     
+
 
    
 
