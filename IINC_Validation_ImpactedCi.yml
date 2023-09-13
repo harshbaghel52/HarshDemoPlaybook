@@ -68,8 +68,7 @@
       set_fact:
         alert_type_matched: "{{ alert_type_matched | default([]) + [item] }}"
       loop: "{{ alert_types }}"
-      when: "'{{ item }}' in json_data.body[*].shortDescription and '{{ item }}' in json_data.body[*].fullDescription"
-
+      when: "json_data.body[*].shortDescription | contains('\"' ~ item ~ '\"') and json_data.body[*].fullDescription | contains('\"' ~ item ~ '\"')"
     - name: Display the alert_type_matched
       debug:
         var: alert_type_matched
