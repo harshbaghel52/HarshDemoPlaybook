@@ -23,22 +23,17 @@
       debug:
         var: json_data
 
-    - name: Extract Impacted CI values and append to the list
+    - name: Extract Impacted CI 
       set_fact:
        impacted_ci_List: "{{ json_data.body | json_query('impactedCi') }}"
       
 
-    - name: Display the impacted ci list
+    - name: Display the impacted ci 
       debug:
         var: impacted_ci_List
 
-    - name: Loop through impacted CIs and include tasks
-      include_tasks: mysql_query_playbook.yml
-      vars:  
-        query: "SELECT * FROM ci_details ;"
 
-
-    - name: Loop through impacted CIs and include tasks
+    - name: Get The cmdb details 
       include_tasks: mysql_query_playbook.yml
       #loop: "{{ impacted_ci_List }}"
       #loop_control:
@@ -46,7 +41,7 @@
       vars:  
         query: "SELECT ci_name, credId FROM incidentdata.ci_details ci INNER JOIN incidentdata.`credId-details` cr ON ci.os = cr.os and ci.dns_domain = cr.`prod-EU-Domain` and ci.credType = cr.credType  where ci_name = '{{ impacted_ci_List }}';"
 
-    - name: Loop through impacted CIs and include tasks
+    - name: Get the tickettypes
       include_tasks: mysql_query_playbook.yml
       vars:  
         query: "select alertType from template_details where ticketType='{{ ticketType }}' ;"
